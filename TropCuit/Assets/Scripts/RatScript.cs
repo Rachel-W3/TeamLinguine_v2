@@ -96,23 +96,23 @@ public class RatScript : MonoBehaviour
     {
         if (Input.GetKey("w"))
         {
-            rat.AddForce(0, 0, speed, ForceMode.Acceleration);
+            rat.AddForce(0, 0, -speed, ForceMode.Acceleration);
         }
         if (Input.GetKey("a"))
         {
-            rat.AddForce(-speed, 0, 0, ForceMode.Acceleration);
+            rat.AddForce(speed, 0, 0, ForceMode.Acceleration);
         }
         if (Input.GetKey("s"))
         {
-            rat.AddForce(0, 0, -speed, ForceMode.Acceleration);
+            rat.AddForce(0, 0, speed, ForceMode.Acceleration);
         }
         if (Input.GetKey("d"))
         {
-            rat.AddForce(speed, 0, 0, ForceMode.Acceleration);
+            rat.AddForce(-speed, 0, 0, ForceMode.Acceleration);
         }
         if (Input.GetKeyDown("space"))
         {
-            rat.AddForce(0, 5.0f, 0, ForceMode.Impulse);
+            rat.AddForce(0, 10.0f, 0, ForceMode.Impulse);
         }
     }
 
