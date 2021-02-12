@@ -3,7 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Food
+  - Pot
+  - Chef
+  - Sandwhich
+  - CheeseCooking
+  - BreadCooking
+  - MeatCooking
+  - cheese
+  - bread
+  - meat
+  - gameOverText
   layers:
   - Default
   - TransparentFX
