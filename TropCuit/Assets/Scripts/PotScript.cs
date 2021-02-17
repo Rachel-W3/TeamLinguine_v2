@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PotScript : MonoBehaviour
 {
@@ -10,9 +11,7 @@ public class PotScript : MonoBehaviour
     public bool cheeseIn;
     public bool meatIn;
     public bool cooking;
-    GameObject progressSlider;
-
-
+    public Slider progressSlider;
     
     // Start is called before the first frame update
     void Start()
@@ -23,9 +22,6 @@ public class PotScript : MonoBehaviour
         cheeseIn = false;
         cooking = false;
 
-        //find the slider of the child canvas
-        //this is hard and I don't get it
-        
     }
 
     // Update is called once per frame
@@ -39,7 +35,7 @@ public class PotScript : MonoBehaviour
 
         if (cooking)
         {
-            //update the slider once per frame till it's done
+            progressSlider.value += 0.0005f;
         }
     }
 }

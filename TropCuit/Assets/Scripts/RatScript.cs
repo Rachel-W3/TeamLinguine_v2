@@ -71,20 +71,26 @@ public class RatScript : MonoBehaviour
             //If Colliding Object is a Pot
             if (collision.gameObject.tag == "Pot" && hasItem == true)
             {
+                foodType = food.tag;
+
+                Debug.Log("Collision detected! With " + foodType);
 
                 if (foodType == "cheese")
                 {
                     //sandwhichRecipe.cookingCheese = true;
+                    potScript = collision.gameObject.GetComponent<PotScript>();
                     potScript.cheeseIn = true;
                 }
                 else if (foodType == "bread")
                 {
                     //sandwhichRecipe.cookingBread = true;
+                    potScript = collision.gameObject.GetComponent<PotScript>();
                     potScript.breadIn = true;
                 }
                 else if (foodType == "meat")
                 {
                     //sandwhichRecipe.cookingMeat = true;
+                    potScript = collision.gameObject.GetComponent<PotScript>();
                     potScript.meatIn = true;
                 }
 

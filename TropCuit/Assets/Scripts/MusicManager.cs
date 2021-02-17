@@ -67,14 +67,14 @@ public class MusicManager : MonoBehaviour
                 if (!musicSourceBGM.isPlaying)
                 {
                     musicSourceBGM.Play();
-                    Debug.Log("Starting Background Music!");
+                    //Debug.Log("Starting Background Music!");
                     musicSourceBGM.GetComponent<AudioSource>().volume = 0;
                     FadeIn(musicSourceBGM);
                 }
                 if (musicSourceBGM.isPlaying && musicSourceBGM.volume < 100f)
                 {
                     FadeIn(musicSourceBGM);
-                    Debug.Log("BG Music Volume is " + musicSourceBGM.volume);
+                    //Debug.Log("BG Music Volume is " + musicSourceBGM.volume);
                 }
                 break;
             case MusicState.Chasing:
@@ -86,7 +86,7 @@ public class MusicManager : MonoBehaviour
                 if (!musicSourceChasing.isPlaying)
                 {
                     musicSourceChasing.Play();
-                    Debug.Log("Starting Chase Music!");
+                    //Debug.Log("Starting Chase Music!");
                     musicSourceChasing.GetComponent<AudioSource>().volume = 0;
                     FadeIn(musicSourceChasing);
                 }
@@ -97,7 +97,7 @@ public class MusicManager : MonoBehaviour
                 if (musicSourceChasing.isPlaying && musicSourceChasing.volume < 50f)
                 {
                     FadeIn(musicSourceChasing);
-                    Debug.Log("Music Volume is " + musicSourceChasing.volume);
+                    //Debug.Log("Music Volume is " + musicSourceChasing.volume);
                 }
                 break;
             case MusicState.Menu:
@@ -141,7 +141,7 @@ public class MusicManager : MonoBehaviour
     //This fades a source over a specified time to a specified volume
     public void StartFade(AudioSource audioSource, float duration, float targetVolume)
     {
-        Debug.Log("Fading Volume");
+        //Debug.Log("Fading Volume");
         float currentTime = 0;
         float start = audioSource.volume;
 
@@ -155,7 +155,7 @@ public class MusicManager : MonoBehaviour
     //Fades tracks in and out as appropriate
     public void FadeIn(AudioSource audioSource)
     {
-        Debug.Log("Fading In " + audioSource);
+        //Debug.Log("Fading In " + audioSource);
         if (audioSource.volume < .3f)
         {
             audioSource.volume += .12f * Time.deltaTime;
