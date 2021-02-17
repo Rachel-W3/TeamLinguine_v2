@@ -11,6 +11,7 @@ public class RatScript : MonoBehaviour
     public TextMeshProUGUI score;
     public SandwhichScript sandwhichRecipe;
     public TextMeshProUGUI gameOverText;
+    public PotScript potScript;
     public TimerScript timer;
     private int scoreInt = 0;
     public bool hasItem = false;
@@ -73,15 +74,18 @@ public class RatScript : MonoBehaviour
 
                 if (foodType == "cheese")
                 {
-                    sandwhichRecipe.cookingCheese = true;
+                    //sandwhichRecipe.cookingCheese = true;
+                    potScript.cheeseIn = true;
                 }
                 else if (foodType == "bread")
                 {
-                    sandwhichRecipe.cookingBread = true;
+                    //sandwhichRecipe.cookingBread = true;
+                    potScript.breadIn = true;
                 }
                 else if (foodType == "meat")
                 {
-                    sandwhichRecipe.cookingMeat = true;
+                    //sandwhichRecipe.cookingMeat = true;
+                    potScript.meatIn = true;
                 }
 
                 Destroy((food));
