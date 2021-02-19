@@ -27,6 +27,7 @@ public class PotScript : MonoBehaviour
 
         potBubble.gameObject.SetActive(true);
         soupBubble.gameObject.SetActive(false);
+        progressSlider.gameObject.SetActive(false);
 
     }
 
@@ -43,17 +44,25 @@ public class PotScript : MonoBehaviour
 
         if (cooking)
         {
-            progressSlider.value += 0.0005f;
+            progressSlider.gameObject.SetActive(true);
+
+            if (progressSlider.value < 1f)
+            {
+                progressSlider.value += 0.0005f;
+            }
+           
         }
 
         if(progressSlider.value >= 1)
         {
             cooked = true;
             cooking = false;
-            //progressSlider.value = 0;
+            progressSlider.value = 0;
             meatIn = false;
             onionIn = false;
             potatoIn = false;
+
+            progressSlider.gameObject.SetActive(false);
 
             soupBubble.gameObject.SetActive(true);
         }
