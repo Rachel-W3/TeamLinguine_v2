@@ -31,6 +31,7 @@ public class PotScript : MonoBehaviour
         if(!cooking && meatIn && breadIn && cheeseIn)
         {
             cooking = true;
+            progressSlider.value = 0f;
         }
 
         if (cooking)

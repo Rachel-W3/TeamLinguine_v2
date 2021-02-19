@@ -80,18 +80,21 @@ public class RatScript : MonoBehaviour
                     //sandwhichRecipe.cookingCheese = true;
                     potScript = collision.gameObject.GetComponent<PotScript>();
                     potScript.cheeseIn = true;
+                    potScript.progressSlider.value += 0.33f;
                 }
                 else if (foodType == "bread")
                 {
                     //sandwhichRecipe.cookingBread = true;
                     potScript = collision.gameObject.GetComponent<PotScript>();
                     potScript.breadIn = true;
+                    potScript.progressSlider.value += 0.33f;
                 }
                 else if (foodType == "meat")
                 {
                     //sandwhichRecipe.cookingMeat = true;
                     potScript = collision.gameObject.GetComponent<PotScript>();
                     potScript.meatIn = true;
+                    potScript.progressSlider.value += 0.33f;
                 }
 
                 Destroy((food));
