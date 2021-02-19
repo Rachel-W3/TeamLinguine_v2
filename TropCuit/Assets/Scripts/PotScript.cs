@@ -43,7 +43,11 @@ public class PotScript : MonoBehaviour
 
         if (cooking)
         {
-            progressSlider.value += 0.0005f;
+            if (progressSlider.value < 1f)
+            {
+                progressSlider.value += 0.0005f;
+            }
+           
         }
 
         if(progressSlider.value >= 1)
