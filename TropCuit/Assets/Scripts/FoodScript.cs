@@ -9,6 +9,9 @@ public class FoodScript : MonoBehaviour
     public GameObject ratGO;
     public RawImage foodBubble;
     public bool pickup = false;
+
+    [HideInInspector]
+    public IngredientSpawnerScript spawner;
     
     // Start is called before the first frame update
     void Start()

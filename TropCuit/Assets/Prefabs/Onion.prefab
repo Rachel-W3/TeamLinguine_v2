@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8123350696579303553}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.1, y: -0.362, z: 9.14}
+  m_LocalPosition: {x: 2.468, y: 2.346, z: 2.908}
   m_LocalScale: {x: 0.67686, y: 0.67686, z: 0.67686}
   m_Children:
   - {fileID: 8123350697253509169}
@@ -130,6 +130,7 @@ MonoBehaviour:
   ratGO: {fileID: 0}
   foodBubble: {fileID: 0}
   pickup: 0
+  spawner: {fileID: 0}
 --- !u!1 &8123350697152751056
 GameObject:
   m_ObjectHideFlags: 0

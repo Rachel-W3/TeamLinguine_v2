@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class RatScript : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class RatScript : MonoBehaviour
 
     public Rigidbody rat;
 
-    private float speed = 10f; //3.5
+    private float speed = 3.5f; //3.5
     private Vector3 directionVector;
 
     // Start is called before the first frame update
@@ -75,6 +76,12 @@ public class RatScript : MonoBehaviour
     {
         if (timer.gameOver == false)
         {
+
+            if (collision.gameObject.tag == "Chef")
+            {
+                GameOver();
+            }
+
             //If Colliding Object is a Pot
             if (collision.gameObject.tag == "Pot")
             {
@@ -105,6 +112,8 @@ public class RatScript : MonoBehaviour
                         potScript.meatIn = true;
                         potScript.progressSlider.value += 0.33f;
                     }
+
+                    food.GetComponent<FoodScript>().spawner.GetComponent<IngredientSpawnerScript>().spawned = false;
 
                     Destroy((food));
                     hasItem = false;
@@ -170,6 +179,11 @@ public class RatScript : MonoBehaviour
             rat.AddForce(0, 11.0f, 0, ForceMode.Impulse); //10
         }
         ratModel.transform.rotation = Quaternion.LookRotation(directionVector);
+    }
+
+    private void GameOver()
+    {
+        SceneManager.LoadScene("CaughtScreen");
     }
 
 }
