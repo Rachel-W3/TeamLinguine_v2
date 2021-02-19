@@ -15,6 +15,11 @@ TagManager:
   - bread
   - meat
   - gameOverText
+  - onion
+  - potato
+  - PotatoCooking
+  - OnionCooking
+  - servingCart
   layers:
   - Default
   - TransparentFX

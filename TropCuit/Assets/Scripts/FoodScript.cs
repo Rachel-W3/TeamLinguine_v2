@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FoodScript : MonoBehaviour
 {
     public RatScript rs;
     public GameObject ratGO;
+    public RawImage foodBubble;
     public bool pickup = false;
     
     // Start is called before the first frame update
@@ -14,6 +16,7 @@ public class FoodScript : MonoBehaviour
         //Get acess to the Rat and its script
         ratGO = GameObject.Find("Rat");
         rs = ratGO.GetComponent<RatScript>();
+        foodBubble = GetComponentInChildren<RawImage>();
     }
 
     // Update is called once per frame
@@ -38,6 +41,7 @@ public class FoodScript : MonoBehaviour
                 rs.hasItem = true;
                 rs.food = this.gameObject;
                 rs.foodType = this.tag;
+                foodBubble.gameObject.SetActive(false);
             }
 
         }

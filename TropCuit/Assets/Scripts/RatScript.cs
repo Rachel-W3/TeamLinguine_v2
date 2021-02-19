@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class RatScript : MonoBehaviour
 {
@@ -15,20 +16,28 @@ public class RatScript : MonoBehaviour
     public TimerScript timer;
     private int scoreInt = 0;
     public bool hasItem = false;
+    public DishScript dishScript;
+    public RawImage deliveryBubble;
+    public GameObject ratModel;
 
     public Rigidbody rat;
 
-    private float speed = 3.5f;
+    private float speed = 10f; //3.5
 
     // Start is called before the first frame update
     void Start()
     {
         timer = GameObject.FindObjectOfType<TimerScript>();
+        dishScript = GameObject.FindObjectOfType<DishScript>();
+        deliveryBubble.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        ratModel.transform.position = this.transform.position;
+
         if (Input.GetKey("escape"))
         {
             Application.Quit();
@@ -43,14 +52,10 @@ public class RatScript : MonoBehaviour
             MovePlayer();
 
             //If ther ecipe is complete
-            if (sandwhichRecipe.cookedCheese && sandwhichRecipe.cookedBread && sandwhichRecipe.cookedMeat)
+            if (potScript.cooked)
             {
-                scoreInt += 10;
-                score.text = scoreInt.ToString();
-
-                sandwhichRecipe.cookedCheese = false;
-                sandwhichRecipe.cookedBread = false;
-                sandwhichRecipe.cookedMeat = false;
+                
+                //tScript.cooked = false;
             }
         }
         else
@@ -69,39 +74,70 @@ public class RatScript : MonoBehaviour
         if (timer.gameOver == false)
         {
             //If Colliding Object is a Pot
-            if (collision.gameObject.tag == "Pot" && hasItem == true)
+            if (collision.gameObject.tag == "Pot")
             {
-                foodType = food.tag;
-
-                Debug.Log("Collision detected! With " + foodType);
-
-                if (foodType == "cheese")
+                if(hasItem == true)
                 {
-                    //sandwhichRecipe.cookingCheese = true;
-                    potScript = collision.gameObject.GetComponent<PotScript>();
-                    potScript.cheeseIn = true;
-                    potScript.progressSlider.value += 0.33f;
+                    foodType = food.tag;
+
+                    Debug.Log("Collision detected! With " + foodType);
+
+                    if (foodType == "potato")
+                    {
+                        sandwhichRecipe.cookingPotato = true;
+                        potScript = collision.gameObject.GetComponent<PotScript>();
+                        potScript.potatoIn = true;
+                        potScript.progressSlider.value += 0.33f;
+                    }
+                    else if (foodType == "onion")
+                    {
+                        sandwhichRecipe.cookingOnion = true;
+                        potScript = collision.gameObject.GetComponent<PotScript>();
+                        potScript.onionIn = true;
+                        potScript.progressSlider.value += 0.33f;
+                    }
+                    else if (foodType == "meat")
+                    {
+                        sandwhichRecipe.cookingMeat = true;
+                        potScript = collision.gameObject.GetComponent<PotScript>();
+                        potScript.meatIn = true;
+                        potScript.progressSlider.value += 0.33f;
+                    }
+
+                    Destroy((food));
+                    hasItem = false;
+                    scoreInt++;
+                    score.text = scoreInt.ToString();
                 }
-                else if (foodType == "bread")
+                else if(potScript.cooked == true && hasItem == false)
                 {
-                    //sandwhichRecipe.cookingBread = true;
-                    potScript = collision.gameObject.GetComponent<PotScript>();
-                    potScript.breadIn = true;
-                    potScript.progressSlider.value += 0.33f;
-                }
-                else if (foodType == "meat")
-                {
-                    //sandwhichRecipe.cookingMeat = true;
-                    potScript = collision.gameObject.GetComponent<PotScript>();
-                    potScript.meatIn = true;
-                    potScript.progressSlider.value += 0.33f;
+                    dishScript.pickup = true;
+                    dishScript.gameObject.SetActive(true);
+                    hasItem = true;
+
+                    potScript.cooked = false;
+                    potScript.soupBubble.gameObject.SetActive(false);
+                    potScript.potBubble.gameObject.SetActive(true);
+                    deliveryBubble.gameObject.SetActive(true);
+
+                    sandwhichRecipe.cookingPotato = false;
+                    sandwhichRecipe.cookingOnion = false;
+                    sandwhichRecipe.cookingMeat = false;
                 }
 
-                Destroy((food));
-                hasItem = false;
-                scoreInt++;
-                score.text = scoreInt.ToString();
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag == "servingCart" && dishScript.pickup == true)
+        {
+                hasItem = false;
+                dishScript.gameObject.SetActive(false);
+                deliveryBubble.gameObject.SetActive(false);
+                scoreInt += 10;
+                score.text = scoreInt.ToString();
         }
     }
 
@@ -125,7 +161,7 @@ public class RatScript : MonoBehaviour
         }
         if (Input.GetKeyDown("space"))
         {
-            rat.AddForce(0, 10.0f, 0, ForceMode.Impulse);
+            rat.AddForce(0, 11.0f, 0, ForceMode.Impulse); //10
         }
     }
 

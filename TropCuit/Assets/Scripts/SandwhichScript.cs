@@ -6,69 +6,73 @@ using TMPro;
 
 public class SandwhichScript : MonoBehaviour
 {
-    public bool cookingCheese = false;
-    public bool cookingBread = false;
+    public bool cookingPotato = false;
+    public bool cookingOnion = false;
     public bool cookingMeat = false;
 
-    public bool cookedCheese = false;
-    public bool cookedBread = false;
-    public bool cookedMeat = false;
-
-    private float cheeseTime = 0;
-    private float breadTime = 0;
+    private float potatoTime = 0;
+    private float onionTime = 0;
     private float meatTime = 0;
 
-    public GameObject cheeseCooking;
-    public GameObject breadCooking;
+    public GameObject potatoCooking;
+    public GameObject onionCooking;
     public GameObject meatCooking;
 
     // Start is called before the first frame update
     void Start()
     {
-        cheeseCooking.SetActive(false);
-        breadCooking.SetActive(false);
+        potatoCooking.SetActive(false);
+        onionCooking.SetActive(false);
         meatCooking.SetActive(false);
-        //cheeseCooking.GetComponentInChildren<TextMeshProUGUI>().enabled = false;
+        //potatoCooking.GetComponentInChildren<TextMeshProUGUI>().enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (cookingCheese == true && cookedCheese == false)
+        if (cookingPotato == true)
         {
-            cheeseCooking.SetActive(true);
+            potatoCooking.SetActive(true);
 
-            cheeseTime += Time.deltaTime;
+            /*potatoTime += Time.deltaTime;
 
-            if (cheeseTime > 10)
+            if (potatoTime > 10)
             {
-                cheeseTime = 0;
-                cookedCheese = true;
-                cookingCheese = false;
-                cheeseCooking.SetActive(false);
-            }
+                potatoTime = 0;
+                cookedpotato = true;
+                cookingpotato = false;
+                potatoCooking.SetActive(false);
+            }*/
+        }
+        else
+        {
+            potatoCooking.SetActive(false);
         }
 
-        if (cookingBread == true && cookedBread == false)
+        if (cookingOnion == true)
         {
-            breadCooking.SetActive(true);
+            onionCooking.SetActive(true);
 
-            breadTime += Time.deltaTime;
+            /*onionTime += Time.deltaTime;
 
-            if (breadTime > 10)
+            if (onionTime > 10)
             {
-                breadTime = 0;
-                cookedBread = true;
-                cookingBread = false;
-                breadCooking.SetActive(false);
-            }
+                onionTime = 0;
+                cookedonion = true;
+                cookingonion = false;
+                onionCooking.SetActive(false);
+            }*/
+        }
+        else
+        {
+            onionCooking.SetActive(false);
         }
 
-        if (cookingMeat == true && cookedMeat == false)
+        if (cookingMeat == true)
         {
             meatCooking.SetActive(true);
 
-            meatTime += Time.deltaTime;
+            /*meatTime += Time.deltaTime;
 
             if (meatTime > 10)
             {
@@ -76,8 +80,12 @@ public class SandwhichScript : MonoBehaviour
                 cookedMeat = true;
                 cookingMeat = false;
                 meatCooking.SetActive(false);
-            }
+            }*/
         }
-        
+        else
+        {
+            meatCooking.SetActive(false);
+        }
+
     }
 }

@@ -13,6 +13,9 @@ public class ChefScript : VehicleScript
     public GameObject waypoint;
     public PathScript path;
 
+    //Animation Variable
+    //public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,12 +23,18 @@ public class ChefScript : VehicleScript
         path = GameObject.Find("Path").GetComponent<PathScript>();
         waypoint = path.waypoints[0];
         vehiclePosition = waypoint.transform.position;
+        //animator = GetComponentInChildren<Animator>();
+
+        //animator.SetTrigger("animation_1");
     }
 
     // Update is called once per frame
     void Update()
     {
         base.Update();
+
+        //animator.SetTrigger("animation_2");
+        //animator.Play("animation_2");
 
         vehiclePosition = transform.position;
         // Adjusts vehicle height based on terrain height
