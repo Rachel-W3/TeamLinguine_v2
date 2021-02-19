@@ -52,11 +52,11 @@ public class RatScript : MonoBehaviour
             MovePlayer();
 
             //If ther ecipe is complete
-            if (potScript.cooked)
+            /*if (potScript.cooked)
             {
                 
                 //tScript.cooked = false;
-            }
+            }*/
         }
         else
         {
