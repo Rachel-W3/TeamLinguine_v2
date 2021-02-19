@@ -23,6 +23,7 @@ public class RatScript : MonoBehaviour
     public Rigidbody rat;
 
     private float speed = 10f; //3.5
+    private Vector3 directionVector;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,7 @@ public class RatScript : MonoBehaviour
         timer = GameObject.FindObjectOfType<TimerScript>();
         dishScript = GameObject.FindObjectOfType<DishScript>();
         deliveryBubble.gameObject.SetActive(false);
+        directionVector = Vector3.zero;
     }
 
     // Update is called once per frame
@@ -145,24 +147,29 @@ public class RatScript : MonoBehaviour
     {
         if (Input.GetKey("w"))
         {
+            directionVector = new Vector3(-1, 0, 0);
             rat.AddForce(0, 0, -speed, ForceMode.Acceleration);
         }
         if (Input.GetKey("a"))
         {
+            directionVector = new Vector3(0, 0, -1);
             rat.AddForce(speed, 0, 0, ForceMode.Acceleration);
         }
         if (Input.GetKey("s"))
         {
+            directionVector = new Vector3(1, 0, 0);
             rat.AddForce(0, 0, speed, ForceMode.Acceleration);
         }
         if (Input.GetKey("d"))
         {
+            directionVector = new Vector3(0, 0, 1);
             rat.AddForce(-speed, 0, 0, ForceMode.Acceleration);
         }
         if (Input.GetKeyDown("space"))
         {
             rat.AddForce(0, 11.0f, 0, ForceMode.Impulse); //10
         }
+        ratModel.transform.rotation = Quaternion.LookRotation(directionVector);
     }
 
 }

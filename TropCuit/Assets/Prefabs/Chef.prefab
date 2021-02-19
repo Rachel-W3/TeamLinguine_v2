@@ -56,7 +56,7 @@ MonoBehaviour:
   maxForce: 0
   avoidRadius: 0.3
   fovAngle: 110
-  ratSpotted: 0
+  playerInSight: 0
   waypoint: {fileID: 0}
   path: {fileID: 0}
 --- !u!54 &8536272696923037817
@@ -86,7 +86,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.5
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7768946319268225768
 GameObject:
