@@ -444,7 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3638f17c7d7430a4fbd047b7d4ec574c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextScene: KitchenTest
+  nextScene: MainMenu
 --- !u!4 &1001549846
 Transform:
   m_ObjectHideFlags: 0
