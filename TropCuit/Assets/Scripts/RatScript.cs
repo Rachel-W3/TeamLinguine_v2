@@ -12,10 +12,9 @@ public class RatScript : MonoBehaviour
     public string foodType;
     public TextMeshProUGUI score;
     public SandwhichScript sandwhichRecipe;
-    public TextMeshProUGUI gameOverText;
     public PotScript potScript;
     public TimerScript timer;
-    private int scoreInt = 0;
+    public static int scoreInt = 0;
     public bool hasItem = false;
     public DishScript dishScript;
     public RawImage deliveryBubble;
@@ -29,6 +28,7 @@ public class RatScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        scoreInt = 0;
         timer = GameObject.FindObjectOfType<TimerScript>();
         dishScript = GameObject.FindObjectOfType<DishScript>();
         deliveryBubble.gameObject.SetActive(false);
@@ -63,7 +63,7 @@ public class RatScript : MonoBehaviour
         }
         else
         {
-            gameOverText.text = "Game Over! \nScore: " + scoreInt.ToString() + "\nPress Esc to Exit";
+            SceneManager.LoadScene("LevelComplete");
         }
     }
 

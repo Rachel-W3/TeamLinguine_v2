@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/KitchenTest.unity
     guid: 70d55dd85dd752f4588130fe3cabdd74
   - enabled: 1
+    path: Assets/Scenes/LevelComplete.unity
+    guid: 5d2b291fde5eed14cbdae56597fcdd86
+  - enabled: 1
     path: Assets/Scenes/CaughtScreen.unity
     guid: 54b485e4d4fcf3c42a9d82ee4eec3a25
   m_configObjects: {}
