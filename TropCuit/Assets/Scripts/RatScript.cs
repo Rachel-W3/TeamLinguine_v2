@@ -41,11 +41,6 @@ public class RatScript : MonoBehaviour
 
         ratModel.transform.position = this.transform.position;
 
-        if (Input.GetKey("escape"))
-        {
-            Application.Quit();
-        }
-
         if (timer.gameOver == false)
         {
             //Update Position Vector
