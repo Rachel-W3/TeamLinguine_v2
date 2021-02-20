@@ -28,6 +28,17 @@ public class PauseMenu : MonoBehaviour
         canvasAnimator.SetBool(gamePausedHash, gamePaused);
     }
 
+    // A bit redundant, but this prevents the resume button from being activated
+    // with the space bar when trying to jump
+    public void Resume()
+    {
+        if(gamePaused)
+        {
+            gamePaused = false;
+            canvasAnimator.SetBool(gamePausedHash, gamePaused);
+        }
+    }
+
     public void Quit()
     {
         Application.Quit();

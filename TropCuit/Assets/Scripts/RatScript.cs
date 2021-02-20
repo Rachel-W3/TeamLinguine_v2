@@ -22,7 +22,7 @@ public class RatScript : MonoBehaviour
 
     public Rigidbody rat;
 
-    private float speed = 3.5f; //3.5
+    private float speed = 5.0f; //originally 3.5, but it was unbearably slow...
     private Vector3 directionVector;
 
     // Start is called before the first frame update
