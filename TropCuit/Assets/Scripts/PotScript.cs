@@ -44,7 +44,6 @@ public class PotScript : MonoBehaviour
 
         if (cooking)
         {
-            progressSlider.gameObject.SetActive(true);
 
             if (progressSlider.value < 1f)
             {

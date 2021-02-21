@@ -20,6 +20,8 @@ public class RatScript : MonoBehaviour
     public RawImage deliveryBubble;
     public GameObject ratModel;
 
+    public Animator anim;
+
     public Rigidbody rat;
 
     private float speed = 5.0f; //originally 3.5, but it was unbearably slow...
@@ -149,31 +151,40 @@ public class RatScript : MonoBehaviour
 
     private void MovePlayer()
     {
+        
+        bool isRunning = false;
+
         if (Input.GetKey("w"))
         {
             directionVector = new Vector3(-1, 0, 0);
             rat.AddForce(0, 0, -speed, ForceMode.Acceleration);
+            isRunning = true;
         }
         if (Input.GetKey("a"))
         {
             directionVector = new Vector3(0, 0, -1);
             rat.AddForce(speed, 0, 0, ForceMode.Acceleration);
+            isRunning = true;
         }
         if (Input.GetKey("s"))
         {
             directionVector = new Vector3(1, 0, 0);
             rat.AddForce(0, 0, speed, ForceMode.Acceleration);
+            isRunning = true;
         }
         if (Input.GetKey("d"))
         {
             directionVector = new Vector3(0, 0, 1);
             rat.AddForce(-speed, 0, 0, ForceMode.Acceleration);
+            isRunning = true;
         }
         if (Input.GetKeyDown("space"))
         {
             rat.AddForce(0, 11.0f, 0, ForceMode.Impulse); //10
+            isRunning = true;
         }
         ratModel.transform.rotation = Quaternion.LookRotation(directionVector);
+        anim.SetBool("isRunning", isRunning);
     }
 
     private void GameOver()
