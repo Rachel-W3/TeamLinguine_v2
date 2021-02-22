@@ -82,6 +82,8 @@ public class RatScript : MonoBehaviour
             //If Colliding Object is a Pot
             if (collision.gameObject.tag == "Pot")
             {
+                //potScript = collision.gameObject.GetComponent<PotScript>();
+
                 if(hasItem == true)
                 {
                     foodType = food.tag;
@@ -94,6 +96,7 @@ public class RatScript : MonoBehaviour
                         potScript = collision.gameObject.GetComponent<PotScript>();
                         potScript.potatoIn = true;
                         potScript.progressSlider.value += 0.33f;
+
                     }
                     else if (foodType == "onion")
                     {
@@ -180,7 +183,7 @@ public class RatScript : MonoBehaviour
         }
         if (Input.GetKeyDown("space"))
         {
-            rat.AddForce(0, 11.0f, 0, ForceMode.Impulse); //10
+            rat.AddForce(0, 10.0f, 0, ForceMode.Impulse); 
             isRunning = true;
         }
         ratModel.transform.rotation = Quaternion.LookRotation(directionVector);
