@@ -82,13 +82,20 @@ public class RatScript : MonoBehaviour
             //If Colliding Object is a Pot
             if (collision.gameObject.tag == "Pot")
             {
-                //potScript = collision.gameObject.GetComponent<PotScript>();
+
+                potScript = collision.gameObject.GetComponent<PotScript>();
 
                 if(hasItem == true)
                 {
                     foodType = food.tag;
 
                     Debug.Log("Collision detected! With " + foodType);
+
+                    //Activate the pots
+                    if (!potScript.progressSlider.gameObject.activeInHierarchy)
+                    {
+                        potScript.progressSlider.gameObject.SetActive(true);
+                    }
 
                     if (foodType == "potato")
                     {
