@@ -101,23 +101,32 @@ public class RatScript : MonoBehaviour
                     {
                         sandwhichRecipe.cookingPotato = true;
                         potScript = collision.gameObject.GetComponent<PotScript>();
-                        potScript.potatoIn = true;
-                        potScript.progressSlider.value += 0.33f;
+                        if (!potScript.potatoIn)
+                        {
+                            potScript.potatoIn = true;
+                            potScript.progressSlider.value += 0.33f;
+                        }
 
                     }
                     else if (foodType == "onion")
                     {
                         sandwhichRecipe.cookingOnion = true;
                         potScript = collision.gameObject.GetComponent<PotScript>();
-                        potScript.onionIn = true;
-                        potScript.progressSlider.value += 0.33f;
+                        if (!potScript.onionIn)
+                        {
+                            potScript.onionIn = true;
+                            potScript.progressSlider.value += 0.33f;
+                        }
                     }
                     else if (foodType == "meat")
                     {
                         sandwhichRecipe.cookingMeat = true;
                         potScript = collision.gameObject.GetComponent<PotScript>();
-                        potScript.meatIn = true;
-                        potScript.progressSlider.value += 0.33f;
+                        if (!potScript.meatIn)
+                        {
+                            potScript.meatIn = true;
+                            potScript.progressSlider.value += 0.33f;
+                        }
                     }
 
                     food.GetComponent<FoodScript>().spawner.GetComponent<IngredientSpawnerScript>().spawned = false;
