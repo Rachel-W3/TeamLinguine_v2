@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Scoreboard : MonoBehaviour
 {
@@ -17,8 +18,9 @@ public class Scoreboard : MonoBehaviour
     }
 
     // For the finish button...much copy pasta
-    public void Quit()
+    public void Finish()
     {
-        Application.Quit();
+        //Application.Quit();
+        SceneManager.LoadScene("MainMenu");
     }
 }
