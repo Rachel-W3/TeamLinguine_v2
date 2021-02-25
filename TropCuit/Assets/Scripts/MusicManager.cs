@@ -156,7 +156,7 @@ public class MusicManager : MonoBehaviour
     public void FadeIn(AudioSource audioSource)
     {
         //Debug.Log("Fading In " + audioSource);
-        if (audioSource.volume < .3f)
+        if (audioSource.volume < .22f)
         {
             audioSource.volume += .12f * Time.deltaTime;
         }

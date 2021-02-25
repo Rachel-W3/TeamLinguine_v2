@@ -10,8 +10,13 @@ public class FoodScript : MonoBehaviour
     public RawImage foodBubble;
     public bool pickup = false;
 
+    //why can't I link this in the inspector?
+    public AudioSource foodPickUp;
+
     [HideInInspector]
     public IngredientSpawnerScript spawner;
+
+    
     
     // Start is called before the first frame update
     void Start()
@@ -45,6 +50,10 @@ public class FoodScript : MonoBehaviour
                 rs.food = this.gameObject;
                 rs.foodType = this.tag;
                 foodBubble.gameObject.SetActive(false);
+
+
+
+                //foodPickUp.Play();
             }
 
         }
