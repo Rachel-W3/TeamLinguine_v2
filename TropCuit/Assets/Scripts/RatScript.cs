@@ -11,7 +11,10 @@ public class RatScript : MonoBehaviour
     public GameObject food;
     public string foodType;
     public TextMeshProUGUI score;
-    public SandwhichScript sandwhichRecipe;
+    public SandwhichScript[] sandwhichRecipe = new SandwhichScript[4];
+    //public SandwhichScript sandwhichRecipe2;
+    //public SandwhichScript sandwhichRecipe3;
+    //public SandwhichScript sandwhichRecipe4;
     public PotScript potScript;
     public TimerScript timer;
     public static int scoreInt = 0;
@@ -24,10 +27,13 @@ public class RatScript : MonoBehaviour
 
     public Rigidbody rat;
 
-    private float speed = 5.0f; //originally 3.5, but it was unbearably slow...
+    public int recipes = 0;
+
+    private float speed = 10.0f; //originally 3.5, but it was unbearably slow...
     private Vector3 directionVector;
 
     public AudioSource foodPutDown;
+    public AudioSource foodPickUp;
 
 
     // Start is called before the first frame update
@@ -38,6 +44,11 @@ public class RatScript : MonoBehaviour
         dishScript = GameObject.FindObjectOfType<DishScript>();
         deliveryBubble.gameObject.SetActive(false);
         directionVector = Vector3.zero;
+
+        for (int i = 1; i < 4; i++)
+        {
+            sandwhichRecipe[i].gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -98,11 +109,45 @@ public class RatScript : MonoBehaviour
                     if (!potScript.progressSlider.gameObject.activeInHierarchy)
                     {
                         potScript.progressSlider.gameObject.SetActive(true);
+                        potScript.beingUsed = true;
+                        potScript.orderNum = recipes;
+                        recipes++;
+
+                        //Handle Recipe Visibility
+                        if (recipes == 1)
+                        {
+                            sandwhichRecipe[0].gameObject.SetActive(true);
+                            //for (int i = 1; i < 4; i++)
+                            //{
+                            //    sandwhichRecipe[i].gameObject.SetActive(false);
+                            //}
+                        }
+                        else if(recipes == 2)
+                        {
+                            sandwhichRecipe[1].gameObject.SetActive(true);
+
+                           //for (int i = 2; i < 4; i++)
+                           //{
+                           //    sandwhichRecipe[i].gameObject.SetActive(false);
+                           //}
+                        }
+                        else if (recipes == 3)
+                        {
+                            sandwhichRecipe[2].gameObject.SetActive(true);
+                            //sandwhichRecipe[3].gameObject.SetActive(false);
+
+                        }
+                        else if (recipes == 4)
+                        {
+                            sandwhichRecipe[3].gameObject.SetActive(true);
+                        }
+
+
                     }
 
                     if (foodType == "potato")
                     {
-                        sandwhichRecipe.cookingPotato = true;
+                        sandwhichRecipe[potScript.orderNum].cookingPotato = true;
                         potScript = collision.gameObject.GetComponent<PotScript>();
                         if (!potScript.potatoIn)
                         {
@@ -114,7 +159,7 @@ public class RatScript : MonoBehaviour
                     }
                     else if (foodType == "onion")
                     {
-                        sandwhichRecipe.cookingOnion = true;
+                        sandwhichRecipe[potScript.orderNum].cookingOnion = true;
                         potScript = collision.gameObject.GetComponent<PotScript>();
                         if (!potScript.onionIn)
                         {
@@ -125,7 +170,7 @@ public class RatScript : MonoBehaviour
                     }
                     else if (foodType == "meat")
                     {
-                        sandwhichRecipe.cookingMeat = true;
+                        sandwhichRecipe[potScript.orderNum].cookingMeat = true;
                         potScript = collision.gameObject.GetComponent<PotScript>();
                         if (!potScript.meatIn)
                         {
@@ -148,15 +193,28 @@ public class RatScript : MonoBehaviour
                     dishScript.gameObject.SetActive(true);
                     hasItem = true;
 
+                    potScript.beingUsed = false;
+
+                    if (recipes > 1)
+                    {
+                        recipes--;
+                    }
+
+
+
                     potScript.cooked = false;
                     potScript.soupBubble.gameObject.SetActive(false);
                     potScript.potBubble.gameObject.SetActive(true);
                     deliveryBubble.gameObject.SetActive(true);
 
-                    sandwhichRecipe.cookingPotato = false;
-                    sandwhichRecipe.cookingOnion = false;
-                    sandwhichRecipe.cookingMeat = false;
+                    sandwhichRecipe[potScript.orderNum].cookingPotato = false;
+                    sandwhichRecipe[potScript.orderNum].cookingOnion = false;
+                    sandwhichRecipe[potScript.orderNum].cookingMeat = false;
+
+                    sandwhichRecipe[potScript.orderNum].gameObject.SetActive(false);
                 }
+
+                
 
             }
         }
@@ -166,13 +224,19 @@ public class RatScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "servingCart" && dishScript.pickup == true)
         {
-                hasItem = false;
-                dishScript.gameObject.SetActive(false);
-                deliveryBubble.gameObject.SetActive(false);
-                scoreInt += 10;
-                score.text = scoreInt.ToString();
+            hasItem = false;
+            dishScript.gameObject.SetActive(false);
+            deliveryBubble.gameObject.SetActive(false);
+            scoreInt += 10;
+            score.text = scoreInt.ToString();
+        }
+
+        if (collision.gameObject.tag == "onion" || collision.gameObject.tag == "meat" || collision.gameObject.tag == "potato")
+        {
+            foodPickUp.Play();
         }
     }
+
 
     private void MovePlayer()
     {
