@@ -20,6 +20,7 @@ TagManager:
   - PotatoCooking
   - OnionCooking
   - servingCart
+  - PauseMenu
   layers:
   - Default
   - TransparentFX

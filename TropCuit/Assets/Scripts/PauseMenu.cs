@@ -7,7 +7,7 @@ public class PauseMenu : MonoBehaviour
 {
     public Animator canvasAnimator;
     int gamePausedHash;
-    public static bool gamePaused;
+    public bool gamePaused;
 
     void OnEnable()
     {
@@ -26,6 +26,8 @@ public class PauseMenu : MonoBehaviour
     {
         gamePaused = !canvasAnimator.GetBool(gamePausedHash);
         canvasAnimator.SetBool(gamePausedHash, gamePaused);
+
+
     }
 
     // A bit redundant, but this prevents the resume button from being activated

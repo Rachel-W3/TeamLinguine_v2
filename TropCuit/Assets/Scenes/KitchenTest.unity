@@ -2948,7 +2948,7 @@ GameObject:
   - component: {fileID: 540693987}
   m_Layer: 5
   m_Name: PauseCanvas
-  m_TagString: Untagged
+  m_TagString: PauseMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3047,6 +3047,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasAnimator: {fileID: 1289738289}
+  gamePaused: 0
 --- !u!1 &623469481
 GameObject:
   m_ObjectHideFlags: 0
@@ -4224,7 +4225,9 @@ MonoBehaviour:
   musicSourceBGM: {fileID: 1323332067}
   musicSourceChasing: {fileID: 1663802210}
   targetVolume: 0.5
+  pauseVolume: 0.2
   chefScript: {fileID: 969089334}
+  pauseMenu: {fileID: 540693987}
 --- !u!4 &922835268
 Transform:
   m_ObjectHideFlags: 0

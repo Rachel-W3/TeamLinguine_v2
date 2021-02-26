@@ -17,10 +17,11 @@ public class MusicManager : MonoBehaviour
     public AudioSource musicSourceMenu;
     public AudioSource musicSourceBGM;
     public AudioSource musicSourceChasing;
-    public float targetVolume = 0.5f;
+    public float targetVolume = 0.4f;
+    public float pauseVolume = 0.2f;
     public ChefScript chefScript;
 
-
+    public PauseMenu pauseMenu;
 
 
     // Start is called before the first frame update
@@ -32,11 +33,21 @@ public class MusicManager : MonoBehaviour
         musicSourceMenu.GetComponent<AudioSource>();
         musicSourceBGM.GetComponent<AudioSource>();
         musicSourceChasing.GetComponent<AudioSource>();
+        pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu").GetComponent<PauseMenu>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //lower volume when paused
+        if (pauseMenu.gamePaused)
+        {
+            //this check is correct but the methods don't work
+            Debug.Log("Paused, Fading Music!");
+            FadeLowForPause(musicSourceBGM);
+            FadeLowForPause(musicSourceChasing);
+            Debug.Log(musicSourceBGM.volume);
+        }
         //switch to a different track when caught
 
         if (chefScript.playerInSight)
@@ -71,7 +82,7 @@ public class MusicManager : MonoBehaviour
                     musicSourceBGM.GetComponent<AudioSource>().volume = 0;
                     FadeIn(musicSourceBGM);
                 }
-                if (musicSourceBGM.isPlaying && musicSourceBGM.volume < 100f)
+                if (musicSourceBGM.isPlaying && musicSourceBGM.volume < .2f && !pauseMenu.gamePaused)
                 {
                     FadeIn(musicSourceBGM);
                     //Debug.Log("BG Music Volume is " + musicSourceBGM.volume);
@@ -94,7 +105,7 @@ public class MusicManager : MonoBehaviour
                 {
                     FadeOut(musicSourceBGM);
                 }
-                if (musicSourceChasing.isPlaying && musicSourceChasing.volume < 50f)
+                if (musicSourceChasing.isPlaying && musicSourceChasing.volume < .2f && !pauseMenu.gamePaused)
                 {
                     FadeIn(musicSourceChasing);
                     //Debug.Log("Music Volume is " + musicSourceChasing.volume);
@@ -105,7 +116,6 @@ public class MusicManager : MonoBehaviour
                 {
                     musicSourceMenu.Play();
                     musicSourceMenu.GetComponent<AudioSource>().volume = 0;
-                    StartFade(musicSourceMenu, 2000, 0.3f);
                 }
                 if (musicSourceChasing.isPlaying)
                 {
@@ -115,7 +125,7 @@ public class MusicManager : MonoBehaviour
                 {
                     FadeOut(musicSourceBGM);
                 }
-                if (musicSourceMenu.isPlaying && musicSourceMenu.volume < 100f)
+                if (musicSourceMenu.isPlaying && musicSourceMenu.volume < .2f && !pauseMenu.gamePaused)
                 {
                     FadeIn(musicSourceMenu);
                 }
@@ -137,21 +147,6 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-
-    //This fades a source over a specified time to a specified volume
-    public void StartFade(AudioSource audioSource, float duration, float targetVolume)
-    {
-        //Debug.Log("Fading Volume");
-        float currentTime = 0;
-        float start = audioSource.volume;
-
-        while (currentTime < duration)
-        {
-            currentTime += Time.deltaTime;
-            audioSource.volume = Mathf.Lerp(start, targetVolume, currentTime / duration);
-        }
-    }
-
     //Fades tracks in and out as appropriate
     public void FadeIn(AudioSource audioSource)
     {
@@ -167,6 +162,14 @@ public class MusicManager : MonoBehaviour
         if (audioSource.volume > 0f)
         {
             audioSource.volume -= .2f * Time.deltaTime;
+        }
+    }
+
+    public void FadeLowForPause(AudioSource audioSource)
+    {
+        if (audioSource.volume > 0.05f)
+        {
+            audioSource.volume -= .02f * Time.deltaTime;
         }
     }
 
