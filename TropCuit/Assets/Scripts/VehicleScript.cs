@@ -15,7 +15,7 @@ public abstract class VehicleScript : MonoBehaviour
     public float mass;
     public float maxSpeed;
     public float maxForce;
-    public float avoidRadius; // radius for obstacle avoidance and separation
+    public float avoidRadius = 3f; // radius for obstacle avoidance and separation
 
     //// To prevent objects from leaving the floor
     //public float topBound;
@@ -106,6 +106,39 @@ public abstract class VehicleScript : MonoBehaviour
         return b1 + (value - a1) * (b2 - b1) / (a2 - a1);
     }
 
+    public Vector3 AvoidObstacles(GameObject obstacle)
+    {
+        Vector3 vectorToObstacle = obstacle.transform.position - transform.position;
+        float minDistance = avoidRadius;
+
+        // Is obstacle behind?
+        if (Vector3.Dot(transform.forward, vectorToObstacle) < 0)
+        {
+            return Vector3.zero;
+        }
+        // Far enough ahead?
+        if (vectorToObstacle.sqrMagnitude > minDistance * minDistance)
+        {
+            return Vector3.zero;
+        }
+        // Far enough to the right/left?
+        if (Mathf.Abs(Vector3.Dot(transform.right, vectorToObstacle)) >= minDistance)
+        {
+            return Vector3.zero;
+        }
+
+        // If all fails...
+        // Is obstacle on the right?
+        if (Vector3.Dot(transform.right, vectorToObstacle) > 0)
+        {
+            return -(transform.right * maxSpeed);
+        }
+        else
+        {
+            return transform.right * maxSpeed;
+        }
+    }
+
     #region Other steering behaviors we may need
     //public Vector3 Flee(Vector3 targetPos)
     //{
@@ -134,38 +167,6 @@ public abstract class VehicleScript : MonoBehaviour
     //    return Flee(target.GetComponent<VehicleScript>().futurePos);
     //}
 
-    //public Vector3 AvoidObstacles(GameObject obstacle)
-    //{
-    //    Vector3 vectorToObstacle = obstacle.transform.position - transform.position;
-    //    float minDistance = obstacle.GetComponent<Obstacle>().avoidRadius + avoidRadius;
-
-    //    // Is obstacle behind?
-    //    if (Vector3.Dot(transform.forward, vectorToObstacle) < 0)
-    //    {
-    //        return Vector3.zero;
-    //    }
-    //    // Far enough ahead?
-    //    if (vectorToObstacle.sqrMagnitude > minDistance * minDistance)
-    //    {
-    //        return Vector3.zero;
-    //    }
-    //    // Far enough to the right/left?
-    //    if (Mathf.Abs(Vector3.Dot(transform.right, vectorToObstacle)) >= minDistance)
-    //    {
-    //        return Vector3.zero;
-    //    }
-
-    //    // If all fails...
-    //    // Is obstacle on the right?
-    //    if (Vector3.Dot(transform.right, vectorToObstacle) > 0)
-    //    {
-    //        return -(transform.right * maxSpeed);
-    //    }
-    //    else
-    //    {
-    //        return transform.right * maxSpeed;
-    //    }
-    //}
 
     //public Vector3 Separation()
     //{

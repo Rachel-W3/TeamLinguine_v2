@@ -10,11 +10,17 @@ public class ChefScript : VehicleScript
     private GameObject player;
 
     // Variables for wandering
-    public GameObject waypoint;
+    private GameObject waypoint;
     public PathScript path;
+
+    // Variables for obstacle avoidance
+    private ObstacleManager obstacleManager;
 
     //Animation Variable
     public Animator animator;
+
+    //debugging
+    public Material mat1;
 
     // Start is called before the first frame update
     void Start()
@@ -24,14 +30,22 @@ public class ChefScript : VehicleScript
         waypoint = path.waypoints[0];
         vehiclePosition = waypoint.transform.position;
         animator = GetComponentInChildren<Animator>();
-
         //animator.SetTrigger("animation_1");
+        obstacleManager = GetComponent<ObstacleManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
         base.Update();
+
+        if (obstacleManager != null)
+        {
+            foreach (GameObject obstacle in obstacleManager.obstacles)
+            {
+                ApplyForce(AvoidObstacles(obstacle) * 20.0f); // scaled up
+            }
+        }
 
         animator.SetTrigger("animation_8");
         animator.Play("animation_8");
@@ -96,5 +110,14 @@ public class ChefScript : VehicleScript
                 }
             }
         }
+    }
+
+    private void OnRenderObject()
+    {
+        mat1.SetPass(0);
+        GL.Begin(GL.LINES);
+        GL.Vertex(transform.position + new Vector3(0.0f, 1.0f, 0.0f));
+        GL.Vertex(transform.position + transform.forward * 3f);
+        GL.End();
     }
 }

@@ -54,11 +54,12 @@ MonoBehaviour:
   mass: 3
   maxSpeed: 10
   maxForce: 0
-  avoidRadius: 0.3
+  avoidRadius: 1
   fovAngle: 110
   playerInSight: 0
   waypoint: {fileID: 0}
   path: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!54 &8536272696923037817
 Rigidbody:
   m_ObjectHideFlags: 0
