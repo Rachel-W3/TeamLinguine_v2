@@ -15,7 +15,7 @@ public abstract class VehicleScript : MonoBehaviour
     public float mass;
     public float maxSpeed;
     public float maxForce;
-    public float avoidRadius = 3f; // radius for obstacle avoidance and separation
+    public float avoidRadius; // radius for obstacle avoidance and separation
 
     //// To prevent objects from leaving the floor
     //public float topBound;

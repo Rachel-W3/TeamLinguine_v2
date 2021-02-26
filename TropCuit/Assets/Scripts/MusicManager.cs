@@ -122,7 +122,7 @@ public class MusicManager : MonoBehaviour
                 break;
         }
 
-        //stop any music that has been faded out
+        //stop main menu and chase music if they're not supposed to play
         if (musicSourceMenu.volume == 0 && musicState != MusicState.Menu)
         {
             musicSourceMenu.Stop();
@@ -130,10 +130,6 @@ public class MusicManager : MonoBehaviour
         if (musicSourceChasing.volume == 0 && musicState != MusicState.Chasing)
         {
             musicSourceChasing.Stop();
-        }
-        if (musicSourceBGM.volume == 0 && musicState != MusicState.InGame)
-        {
-            musicSourceBGM.Stop();
         }
     }
 

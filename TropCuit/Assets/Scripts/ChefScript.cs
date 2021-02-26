@@ -15,12 +15,10 @@ public class ChefScript : VehicleScript
 
     // Variables for obstacle avoidance
     private ObstacleManager obstacleManager;
+    public Rigidbody rb;
 
     //Animation Variable
     public Animator animator;
-
-    //debugging
-    public Material mat1;
 
     // Start is called before the first frame update
     void Start()
@@ -43,7 +41,7 @@ public class ChefScript : VehicleScript
         {
             foreach (GameObject obstacle in obstacleManager.obstacles)
             {
-                ApplyForce(AvoidObstacles(obstacle) * 20.0f); // scaled up
+                ApplyForce(AvoidObstacles(obstacle) * 10.0f); // scaled up
             }
         }
 
@@ -54,7 +52,7 @@ public class ChefScript : VehicleScript
         // Adjusts vehicle height based on terrain height
         vehiclePosition.y = Terrain.activeTerrain.SampleHeight(vehiclePosition);
 
-        transform.position = vehiclePosition;
+        rb.AddForce(vehiclePosition.x, vehiclePosition.y, vehiclePosition.z, ForceMode.Acceleration);
     }
 
     public override void CalcSteeringForces()
@@ -94,10 +92,6 @@ public class ChefScript : VehicleScript
     {
         if (other.gameObject == player)
         {
-            // Rat is in the trigger, but we still need to check
-            // if he's in the cone of vision, so this defaults to false
-            playerInSight = false;
-
             Vector3 direction = other.transform.position - transform.position;
             float angle = Vector3.Angle(direction, transform.forward);
 
@@ -112,12 +106,8 @@ public class ChefScript : VehicleScript
         }
     }
 
-    private void OnRenderObject()
+    private void OnTriggerExit(Collider other)
     {
-        mat1.SetPass(0);
-        GL.Begin(GL.LINES);
-        GL.Vertex(transform.position + new Vector3(0.0f, 1.0f, 0.0f));
-        GL.Vertex(transform.position + transform.forward * 3f);
-        GL.End();
+        playerInSight = false;
     }
 }
