@@ -15,7 +15,9 @@ public class PotScript : MonoBehaviour
     public Slider progressSlider;
     public RawImage potBubble;
     public RawImage soupBubble;
-    
+
+    public AudioSource foodCookStart;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +42,7 @@ public class PotScript : MonoBehaviour
             cooking = true;
             progressSlider.value = 0f;
             potBubble.gameObject.SetActive(false);
+            foodCookStart.Play();
         }
 
         if (cooking)

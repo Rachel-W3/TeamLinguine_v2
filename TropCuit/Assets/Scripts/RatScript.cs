@@ -27,6 +27,9 @@ public class RatScript : MonoBehaviour
     private float speed = 5.0f; //originally 3.5, but it was unbearably slow...
     private Vector3 directionVector;
 
+    public AudioSource foodPutDown;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -105,6 +108,7 @@ public class RatScript : MonoBehaviour
                         {
                             potScript.potatoIn = true;
                             potScript.progressSlider.value += 0.33f;
+                            foodPutDown.Play();
                         }
 
                     }
@@ -116,6 +120,7 @@ public class RatScript : MonoBehaviour
                         {
                             potScript.onionIn = true;
                             potScript.progressSlider.value += 0.33f;
+                            foodPutDown.Play();
                         }
                     }
                     else if (foodType == "meat")
@@ -126,6 +131,7 @@ public class RatScript : MonoBehaviour
                         {
                             potScript.meatIn = true;
                             potScript.progressSlider.value += 0.33f;
+                            foodPutDown.Play();
                         }
                     }
 
