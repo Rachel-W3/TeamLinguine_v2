@@ -10,9 +10,6 @@ public class FoodScript : MonoBehaviour
     public RawImage foodBubble;
     public bool pickup = false;
 
-    //why can't I link this in the inspector?
-    public AudioSource foodPickUp;
-
     [HideInInspector]
     public IngredientSpawnerScript spawner;
 
@@ -50,10 +47,6 @@ public class FoodScript : MonoBehaviour
                 rs.food = this.gameObject;
                 rs.foodType = this.tag;
                 foodBubble.gameObject.SetActive(false);
-
-
-
-                //foodPickUp.Play();
             }
 
         }

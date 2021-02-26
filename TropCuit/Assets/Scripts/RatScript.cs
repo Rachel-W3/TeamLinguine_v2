@@ -33,6 +33,7 @@ public class RatScript : MonoBehaviour
     private Vector3 directionVector;
 
     public AudioSource foodPutDown;
+    public AudioSource foodPickUp;
 
 
     // Start is called before the first frame update
@@ -213,7 +214,7 @@ public class RatScript : MonoBehaviour
                     sandwhichRecipe[potScript.orderNum].gameObject.SetActive(false);
                 }
 
-                //Set Recipes Active
+                
 
             }
         }
@@ -223,13 +224,19 @@ public class RatScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "servingCart" && dishScript.pickup == true)
         {
-                hasItem = false;
-                dishScript.gameObject.SetActive(false);
-                deliveryBubble.gameObject.SetActive(false);
-                scoreInt += 10;
-                score.text = scoreInt.ToString();
+            hasItem = false;
+            dishScript.gameObject.SetActive(false);
+            deliveryBubble.gameObject.SetActive(false);
+            scoreInt += 10;
+            score.text = scoreInt.ToString();
+        }
+
+        if (collision.gameObject.tag == "onion" || collision.gameObject.tag == "meat" || collision.gameObject.tag == "potato")
+        {
+            foodPickUp.Play();
         }
     }
+
 
     private void MovePlayer()
     {
