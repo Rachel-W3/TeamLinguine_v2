@@ -18,6 +18,10 @@ public class PotScript : MonoBehaviour
 
     public AudioSource foodCookStart;
 
+    public bool beingUsed = false;
+
+    public int orderNum;
+
     // Start is called before the first frame update
     void Start()
     {
