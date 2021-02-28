@@ -35,6 +35,7 @@ public class RatScript : MonoBehaviour
     public AudioSource foodPutDown;
     public AudioSource foodPickUp;
 
+    private bool canJump;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +45,8 @@ public class RatScript : MonoBehaviour
         dishScript = GameObject.FindObjectOfType<DishScript>();
         deliveryBubble.gameObject.SetActive(false);
         directionVector = Vector3.zero;
+
+        canJump = true;
 
         for (int i = 1; i < 4; i++)
         {
@@ -91,6 +94,11 @@ public class RatScript : MonoBehaviour
             if (collision.gameObject.tag == "Chef")
             {
                 GameOver();
+            }
+
+            if (collision.gameObject.tag == "Ground")
+            {
+                canJump = true;
             }
 
             //If Colliding Object is a Pot
@@ -267,10 +275,13 @@ public class RatScript : MonoBehaviour
             rat.AddForce(-speed, 0, 0, ForceMode.Acceleration);
             isRunning = true;
         }
-        if (Input.GetKeyDown("space"))
-        {
-            rat.AddForce(0, 10.0f, 0, ForceMode.Impulse); 
-            isRunning = true;
+        if (canJump) {
+            if (Input.GetKeyDown("space"))
+            {
+                rat.AddForce(0, 10.0f, 0, ForceMode.Impulse);
+                isRunning = true;
+                canJump = false;
+            }
         }
         ratModel.transform.rotation = Quaternion.LookRotation(directionVector);
         anim.SetBool("isRunning", isRunning);
