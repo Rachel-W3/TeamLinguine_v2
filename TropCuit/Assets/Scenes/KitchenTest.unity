@@ -7954,6 +7954,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 30983982}
     - target: {fileID: 2615699220331699321, guid: 65eba5bedb3b3a747bd1528f20f3e992, type: 3}
+      propertyPath: dish
+      value: 
+      objectReference: {fileID: 1811945478}
+    - target: {fileID: 2615699220331699321, guid: 65eba5bedb3b3a747bd1528f20f3e992, type: 3}
       propertyPath: score
       value: 
       objectReference: {fileID: 1965794284}

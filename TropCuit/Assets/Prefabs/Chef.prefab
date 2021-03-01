@@ -74,6 +74,7 @@ MonoBehaviour:
   fovAngle: 150
   playerInSight: 0
   path: {fileID: 0}
+  rb: {fileID: 0}
   animator: {fileID: 0}
 --- !u!135 &1150158773605005776
 SphereCollider:
@@ -86,7 +87,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 8
+  m_Radius: 6
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7768946319268225768
 GameObject:

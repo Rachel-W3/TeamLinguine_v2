@@ -19,6 +19,7 @@ public class RatScript : MonoBehaviour
     public TimerScript timer;
     public static int scoreInt = 0;
     public bool hasItem = false;
+    public GameObject dish;
     public DishScript dishScript;
     public RawImage deliveryBubble;
     public GameObject ratModel;
@@ -41,8 +42,9 @@ public class RatScript : MonoBehaviour
     void Start()
     {
         scoreInt = 0;
-        timer = GameObject.FindObjectOfType<TimerScript>();
-        dishScript = GameObject.FindObjectOfType<DishScript>();
+        timer = FindObjectOfType<TimerScript>();
+        dishScript = dish.GetComponent<DishScript>();
+ 
         deliveryBubble.gameObject.SetActive(false);
         directionVector = Vector3.zero;
 
